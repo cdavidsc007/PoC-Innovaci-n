@@ -11,7 +11,7 @@ namespace Application.Interfaces
         void Update(Credito credito);
         void Delete(Credito credito);
         void Delete(int id);
-        void New(Credito credito);
+        int New(Credito credito);
 
     }
 }

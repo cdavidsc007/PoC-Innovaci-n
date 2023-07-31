@@ -48,16 +48,18 @@ namespace Application
         {
             _creditoRepository.Delete(id);
         }
-        public void New(Credito credito) {
+        public int New(Credito credito) {
             var cliente = _clienteRepository.GetByID(credito.IdCliente);
             if (cliente.Cupo - cliente.Deuda > credito.Monto)
             {
                 _creditoRepository.Insert(credito);
                 cliente.Deuda += (double)credito.Monto;
                 _clienteRepository.Update(cliente);
+                return 1;
+
             }else
             {
-
+               return 0;
             }
         }
 

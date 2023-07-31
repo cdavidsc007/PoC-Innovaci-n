@@ -15,7 +15,6 @@ namespace PoC_Innovación.Controllers
     {
         public readonly IComercioService _comercioService;
 
-        // GET: api/<CreditoController>
         public ComercioController(IComercioService comercioService)
         {
             _comercioService = comercioService;
@@ -38,19 +37,18 @@ namespace PoC_Innovación.Controllers
 
                 if (comercio == null)
                 {
-                    return NotFound(); // 404 Not Found response when the client with the given ID is not found.
+                    return NotFound(); 
                 }
 
-                return Ok(comercio); // 200 OK response with the Comercio data in the response body.
+                return Ok(comercio); 
             }
             catch (Exception ex)
             {
-                // Handle exceptions and return an appropriate response (e.g., 500 Internal Server Error).
                 return StatusCode(500, ex.Message);
             }
         }
 
-        // POST: api/Comercio
+      
         [HttpPost]
         public IActionResult Post([FromBody] Comercio comercio)
         {
@@ -59,20 +57,16 @@ namespace PoC_Innovación.Controllers
 
                 _comercioService.Insert(comercio);
 
-
-                // If the client creation is successful, return 201 Created status code.
-                // Also, include the created Comercio in the response body.
                 return Ok();
             }
             catch (Exception ex)
             {
-                // Handle exceptions and return an appropriate response (e.g., 500 Internal Server Error).
-                return StatusCode(500, ex.Message);
+               return StatusCode(500, ex.Message);
             }
         }
 
 
-        // PUT api/<CreditoController>/5
+     
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Comercio updatedComercio)
         {
@@ -82,27 +76,26 @@ namespace PoC_Innovación.Controllers
 
                 if (existingComercio == null)
                 {
-                    return NotFound(); // If the client with the given ID is not found, return 404 Not Found.
+                    return NotFound();
                 }
 
-                // Perform the update by merging the data from updatedComercio into existingComercio.
+             
                 existingComercio.Nombre = updatedComercio.Nombre ?? existingComercio.Nombre;
                 existingComercio.Direccion = updatedComercio.Direccion ?? existingComercio.Direccion;
                 existingComercio.Telefono = updatedComercio.Telefono ?? existingComercio.Telefono;
                 
 
-                _comercioService.Update(existingComercio); // Call the service method to update the client.
+                _comercioService.Update(existingComercio);
 
-                return NoContent(); // 204 No Content response indicates successful update without a response body.
+                return NoContent(); 
             }
             catch (Exception ex)
             {
-                // Handle exceptions and return an appropriate response (e.g., 500 Internal Server Error).
                 return StatusCode(500, ex.Message);
             }
         }
 
-        // DELETE api/<CreditoController>/5
+       
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
